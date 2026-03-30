@@ -36,7 +36,8 @@
 ## Table of Contents
 
 - [Honest Comparison: Stark vs S4CL vs Raw Modding](#honest-comparison-stark-vs-s4cl-vs-raw-modding)
-- [Visual Roadmap](#visual-roadmap)
+- [How It Compares](#️-how-it-compares)
+- [Roadmap](#️-roadmap)
 - [The Problem](#the-problem)
 - [The Stark Way](#the-stark-way)
 - [Quick Start](#quick-start)
@@ -92,56 +93,44 @@ We believe in honest tools.  Here is where each approach actually stands.
 
 ---
 
-## Visual Roadmap
+## ⚖️ How It Compares
 
-```
-v0.1 (Released)                     v0.2 (Current)
-+---------------------------+       +---------------------------+
-| Core Engine               |       | + Game Hooks              |
-|  - Typed EventBus         |       |   - SimInfo lifecycle     |
-|  - Injection decorators   |  -->  |   - Zone spin-up/load     |
-|  - Mod registry           |       |   - InstanceManager load  |
-|  - Diagnostics            |       |   - Funds interception    |
-|  - Services (Sim/HH/World)|       | + Settings engine         |
-|  - Structured logging     |       |   - 3-tier presets        |
-|  - Tuning helpers         |       | + Game-time scheduler     |
-+---------------------------+       | + Type stubs for IDE      |
-                                    +---------------------------+
-                                                |
-                                                v
-                                    v0.3 (Next)
-                                    +---------------------------+
-                                    | + Story progression hooks |
-                                    | + CAS / Outfit service    |
-                                    | + Interaction builder     |
-                                    | + Dialogue / notification |
-                                    |   utilities               |
-                                    | + Trait/Buff service       |
-                                    |   (beyond TuningHelper)   |
-                                    +---------------------------+
-                                                |
-                                                v
-                                    v0.4 (Planned)
-                                    +---------------------------+
-                                    | + Tuning override system  |
-                                    |   (XML-free patching)     |
-                                    | + Affordance injection    |
-                                    |   (pie menu system)       |
-                                    | + Mod packaging CLI       |
-                                    |   (via stark-devkit)      |
-                                    | + Hot reload support      |
-                                    +---------------------------+
-                                                |
-                                                v
-                                    v1.0 (Goal)
-                                    +---------------------------+
-                                    | + Feature parity with     |
-                                    |   S4CL core utilities     |
-                                    | + Community mod adoption  |
-                                    | + Full API documentation  |
-                                    | + Stable, versioned API   |
-                                    +---------------------------+
-```
+sims4-stark-framework replaces S4CL (Sims4CommunityLibrary) as the primary Python modding framework for Sims 4.
+
+| Feature | S4CL (Community Library) | sims4-stark-framework |
+|---------|--------------------------|----------------------|
+| Type annotations | Partial — many `Any` types | Full — all public APIs typed |
+| Decorator-driven hooks | No — manual injection pattern | Yes — `@on_event`, `@inject`, `@mod` |
+| Dependency injection | No | Yes — `@inject` gives service access |
+| Hot reload | No | Yes — live mod updates without restart |
+| Event system | Limited custom events | Typed event bus with wildcard matching |
+| Mod lifecycle | Manual `_reload_module` | `@mod` decorator handles init/teardown |
+| Python version | 3.7 (EA's interpreter) | 3.7 — same EA interpreter, full compat |
+| Game version compat | Lags behind EA patches | Pinned stubs, patch-tracked |
+| Learning curve | High — requires understanding S4CL internals | Low — decorator syntax, standard Python patterns |
+| Active maintenance | Community-maintained, slow patch response | Actively maintained by Stark Studio Labs |
+| License | MIT | MIT |
+
+> **Note:** S4CL is a genuine community achievement and many great mods depend on it. The Stark Framework is not a drop-in replacement — it's a different API designed for new mods from scratch.
+
+---
+
+## 🗺️ Roadmap
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| `@mod` decorator — lifecycle management | ✅ Shipped | Init, teardown, reload hooks |
+| `@on_event` — typed game event hooks | ✅ Shipped | 40+ event types |
+| `@inject` — service injection | ✅ Shipped | Direct access to EA's service registry |
+| Type stubs for EA's Python API | ✅ Shipped | Enables IDE autocomplete |
+| Hot reload server | 🔨 In Progress | File watcher → live mod swap |
+| Wildcard event matching | 🔨 In Progress | `sim.skill.*` pattern matching |
+| Inter-mod messaging bus | 📋 Planned | Mods can publish/subscribe to each other |
+| Sim state query API | 📋 Planned | Cleaner access to sim traits, skills, needs |
+| Game version compatibility checker | 📋 Planned | Warn when stubs are out of date after EA patch |
+| XML tuning integration | 📋 Planned | Python hooks that interact with tuning changes |
+| S4CL compatibility shim | ❌ Out of Scope | Intentionally different API |
+| CAS / Build-Buy assets | ❌ Out of Scope | Script mods only; use S4S for assets |
 
 ---
 
