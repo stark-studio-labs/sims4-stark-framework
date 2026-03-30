@@ -1,10 +1,10 @@
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "sims4-stark-framework"
-version = "0.1.0"
+version = "0.2.0"
 description = "A modern, typed modding framework for The Sims 4"
 readme = "README.md"
 license = "MIT"
@@ -16,7 +16,6 @@ keywords = ["sims4", "modding", "framework", "ts4"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
@@ -39,3 +38,6 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.mypy]
+mypy_path = "stubs"

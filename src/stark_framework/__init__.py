@@ -7,7 +7,9 @@ Quick start:
     from stark_framework.core.events import EventBus, Event
     from stark_framework.core.injection import inject_before
     from stark_framework.core.registry import ModRegistry
+    from stark_framework.core.settings import Settings, Preset
+    from stark_framework.core.scheduler import GameScheduler
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __author__ = "Stark Labs"
